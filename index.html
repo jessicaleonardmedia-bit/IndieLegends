@@ -284,8 +284,8 @@ const LETTERS = 'ABCDEFG';
 
 let nextItemId = 1;
 let items = [
-  {id:nextItemId++, group:'1', pair:'A', n:1, script:'Welcome to the news. (sample item, replace with the real script)', cue:null},
-  {id:nextItemId++, group:'1', pair:'A', n:2, script:'Our first story tonight... (sample)', cue:null},
+  {id:nextItemId++, group:'1', pair:'A', script:'Welcome to the news. (sample item, replace with the real script)', cue:null},
+  {id:nextItemId++, group:'1', pair:'A', script:'Our first story tonight... (sample)', cue:null},
 ];
 let nextShotId = 5;
 let shots = [
@@ -515,18 +515,28 @@ function addShot(){
 function renderItems(){
   const wrap=document.getElementById('items');
   if(!items.length){ wrap.innerHTML='<div class="help">No items yet. Pull a script sheet, or add one by hand above.</div>'; return; }
-  const sorted=[...items].sort((a,b)=> String(a.group).localeCompare(String(b.group)) || String(a.pair).localeCompare(String(b.pair)) || (a.n-b.n));
-  let html=''; let curG=null, curP=null;
-  sorted.forEach(it=>{
-    if(it.group!==curG){ curG=it.group; curP=null; html+=`<div class="grphead">Group ${escapeHtml(it.group)}</div>`; }
-    if(it.pair!==curP){ curP=it.pair; const mem=pairMembers(it.pair);
-      html+=`<div class="prhead">Pair ${escapeHtml(it.pair)} <span class="prmembers">${mem.length?escapeHtml(mem.join(' + ')):'unassigned on the board'}</span></div>`; }
-    const cue=it.cue?shotById(it.cue):null;
-    html+=`<div class="item">
-      <span class="itemno">${escapeHtml(it.pair)}${it.n}</span>
-      <div class="itemscript">${escapeHtml(it.script)}</div>
-      <div class="itemcue ${cue?'set':''}" data-item="${it.id}">${cue?`<span class="cuelabel">${escapeHtml(cue.label)}</span>`:'<span class="empty">drop a shot</span>'}</div>
-    </div>`;
+  const groupsOrder=[]; const gmap={};
+  items.forEach(it=>{
+    if(!gmap[it.group]){ gmap[it.group]={order:[],pairs:{}}; groupsOrder.push(it.group); }
+    const g=gmap[it.group];
+    if(!g.pairs[it.pair]){ g.pairs[it.pair]=[]; g.order.push(it.pair); }
+    g.pairs[it.pair].push(it);
+  });
+  let html='';
+  groupsOrder.forEach(gk=>{
+    html+=`<div class="grphead">Group ${escapeHtml(gk)}</div>`;
+    gmap[gk].order.forEach(pk=>{
+      const mem=pairMembers(pk);
+      html+=`<div class="prhead">Pair ${escapeHtml(pk)} <span class="prmembers">${mem.length?escapeHtml(mem.join(' + ')):'unassigned on the board'}</span></div>`;
+      gmap[gk].pairs[pk].forEach((it,idx)=>{
+        const cue=it.cue?shotById(it.cue):null;
+        html+=`<div class="item">
+          <span class="itemno">${escapeHtml(pk)}${idx+1}</span>
+          <div class="itemscript">${escapeHtml(it.script)}</div>
+          <div class="itemcue ${cue?'set':''}" data-item="${it.id}">${cue?`<span class="cuelabel">${escapeHtml(cue.label)}</span>`:'<span class="empty">drop a shot</span>'}</div>
+        </div>`;
+      });
+    });
   });
   wrap.innerHTML=html;
   wrap.querySelectorAll('.itemcue').forEach(c=>c.addEventListener('click',()=>onCueClick(+c.dataset.item)));
@@ -573,9 +583,8 @@ async function pullScript(){
     const fresh=rows.map(r=>{
       const group=(r[0]||'1').trim()||'1';
       const pair=((r[1]||'A').trim()||'A').toUpperCase();
-      const n=parseInt((r[2]||'').trim())||0;
       const script=(r[3]||'').trim();
-      return script?{id:nextItemId++, group, pair, n, script, cue:null}:null;
+      return script?{id:nextItemId++, group, pair, script, cue:null}:null;
     }).filter(Boolean);
     if(!fresh.length){ toast('Sheet had no script rows'); return; }
     items=fresh; renderShotList(); store.save(); toast('Loaded '+fresh.length+' items');
@@ -586,8 +595,7 @@ function addItemManual(){
   const p=(document.getElementById('aiPair').value||'A').trim().toUpperCase();
   const sc=document.getElementById('aiScript').value.trim();
   if(!sc){ toast('Add some script text'); return; }
-  const n=items.filter(it=>it.group===g && it.pair===p).reduce((m,it)=>Math.max(m,it.n),0)+1;
-  items.push({id:nextItemId++, group:g, pair:p, n, script:sc, cue:null});
+  items.push({id:nextItemId++, group:g, pair:p, script:sc, cue:null});
   document.getElementById('aiScript').value='';
   renderShotList(); store.save();
 }
