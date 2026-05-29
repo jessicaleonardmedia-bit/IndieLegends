@@ -26,56 +26,33 @@
   h1 .hi{color:var(--pink)}
   .subh{font-family:var(--mono);font-size:12.5px;color:var(--cyan);margin-top:6px;letter-spacing:.04em}
 
-  /* nav */
-  nav.nav{position:sticky;top:0;z-index:50;display:flex;gap:0;background:var(--black);border-bottom:3px solid var(--pink)}
-  .navtab{flex:1;font-family:var(--display);font-size:clamp(15px,4.4vw,20px);letter-spacing:.02em;text-transform:uppercase;background:var(--black);color:var(--cream);border:0;border-right:1px solid #2a2a2a;padding:13px 6px;cursor:pointer}
+  .topinfo{border:2px solid var(--black);border-radius:3px;margin:14px 16px 0;background:#fff;overflow:hidden}
+  .tiline{padding:8px 13px;border-bottom:1.5px dotted #d8d1bf;font-size:13px}
+  .tiline:last-child{border-bottom:0}
+  .tiline.alert{background:#fff3f9}
+  .tikey{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--pink);margin-right:8px}
+  .tiline.alert .tikey{color:#c00060}
+
+  nav.nav{position:sticky;top:0;z-index:50;display:flex;background:var(--black);border-bottom:3px solid var(--pink);margin-top:14px}
+  .navtab{flex:1;font-family:var(--display);font-size:clamp(14px,4vw,19px);letter-spacing:.02em;text-transform:uppercase;background:var(--black);color:var(--cream);border:0;border-right:1px solid #2a2a2a;padding:13px 6px;cursor:pointer}
   .navtab:last-child{border-right:0}
   .navtab[aria-selected="true"]{background:var(--pink);color:#fff}
 
   .tabpanel{padding:16px}
   .tabpanel[hidden]{display:none}
-
-  /* ---- shared ---- */
   .mono{font-family:var(--mono)}
-  .badge{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;background:var(--yellow);color:var(--black);padding:2px 6px;border-radius:2px;font-weight:700}
-  .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(120px);background:var(--black);color:var(--green);font-family:var(--mono);font-size:13px;letter-spacing:.05em;padding:12px 18px;border-radius:3px;border:2px solid var(--green);transition:transform .35s;z-index:1000;text-transform:uppercase}
-  .toast.show{transform:translateX(-50%) translateY(0)}
 
-  /* ---- CALL SHEET ---- */
-  .csband{display:flex;flex-wrap:wrap;gap:2px;border:3px solid var(--black);border-radius:3px;overflow:hidden;margin-bottom:16px}
-  .csband > div{flex:1;min-width:130px;background:var(--black);color:var(--cream);padding:11px 13px}
-  .csl{display:block;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--green)}
-  .csv{display:block;font-family:var(--display);font-size:22px;letter-spacing:.01em;margin-top:3px}
-  .csgrid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:14px}
-  @media(min-width:680px){.csgrid{grid-template-columns:1fr 1fr}}
-  .csbox{border:2.5px solid var(--black);border-radius:3px;background:#fff;padding:14px 15px;margin-bottom:14px}
-  .csbox h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:20px;letter-spacing:.02em;margin:0 0 8px;color:var(--pink)}
-  .csbox p{margin:0 0 8px}
-  .csbox.alert{border-color:var(--pink);background:#fff3f9}
-  .csbox.alert h3{color:#c00060}
-  .contacts{width:100%;border-collapse:collapse}
-  .contacts td{padding:8px 6px;border-bottom:1.5px dotted #cdc6b5;vertical-align:top}
-  .contacts td:first-child{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;width:42%;color:var(--mute)}
-  .ph{font-family:var(--mono);font-size:12.5px;color:#9a7400;background:#fff8df;border:1.5px dashed var(--yellow);padding:3px 8px;border-radius:2px;display:inline-block}
-  ul.onday{margin:0;padding-left:20px}
-  ul.onday li{margin-bottom:6px}
-
-  /* ---- RUN SHEET ---- */
   .rsnote{font-family:var(--mono);font-size:12px;color:var(--mute);letter-spacing:.02em;margin:0 0 12px;text-transform:uppercase}
-  .tablewrap{overflow-x:auto;border:3px solid var(--black);border-radius:3px}
+  .rsgroup{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:21px;letter-spacing:.02em;margin:20px 0 8px;color:#0089b3}
+  .rsgroup:first-of-type{margin-top:4px}
+  .tablewrap{overflow-x:auto;border:3px solid var(--black);border-radius:3px;margin-bottom:6px}
   .runtable{width:100%;min-width:560px;border-collapse:collapse;background:#fff}
   .runtable th{background:var(--black);color:var(--cream);font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;text-align:left;padding:10px 12px}
   .runtable td{padding:11px 12px;border-bottom:1.5px solid #e6e0d0;vertical-align:top;font-size:14.5px}
   .runtable td.t{font-family:var(--mono);font-size:13px;white-space:nowrap;color:#0089b3;font-weight:700}
   .runtable tr:last-child td{border-bottom:0}
-  .panic{border:2.5px solid var(--black);border-radius:3px;background:#eefaff;padding:14px 15px;margin:16px 0 14px}
-  .panic h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:20px;letter-spacing:.02em;margin:0 0 4px;color:#0089b3}
-  .panic ul{margin:8px 0 0;padding-left:20px;font-family:var(--mono);font-size:13.5px}
-  .panic li{margin-bottom:5px}
-  ul.rsnotes{margin:0;padding-left:20px}
-  ul.rsnotes li{margin-bottom:7px}
+  .rspending{font-family:var(--mono);font-size:11.5px;color:#0089b3;background:#eefaff;border:1.5px solid var(--black);padding:9px 12px;border-radius:2px;margin-top:10px}
 
-  /* ---- ROLE BOARD (carried over) ---- */
   .note{background:#fff6df;border:2px solid var(--black);padding:12px 14px;font-size:14px;border-radius:2px;margin-bottom:4px}
   .note b{font-weight:800}
   .boardhead{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);display:flex;align-items:center;gap:9px;margin:16px 0 6px}
@@ -121,12 +98,33 @@
   .zone h3{font-family:var(--display);font-weight:400;text-transform:uppercase;margin:0 0 2px;font-size:20px;letter-spacing:.02em}
   .zone.oncam h3{color:var(--pink)}.zone.ctrl h3{color:#0089b3}.zone.floor h3{color:#009e54}
   .zone .ztag{font-family:var(--mono);font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+  .pairgroup{border:2px solid var(--black);border-radius:3px;padding:8px;margin-bottom:10px;background:rgba(255,255,255,.55)}
+  .pairhdr{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--pink);margin-bottom:6px}
   .slot{border:2px solid var(--black);border-radius:2px;padding:8px 10px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:rgba(255,255,255,.6);min-height:46px}
+  .pairgroup .slot:last-child{margin-bottom:0}
   .slot.over{outline:3px solid var(--green);outline-offset:2px}
   .slot.reject{animation:shake .3s}
   @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
   .slot .rname{font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.02em}
   .slot .empty{font-family:var(--mono);font-size:11px;color:var(--mute)}
+
+  /* SHOT LIST */
+  .palette{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+  .shotchip{display:inline-flex;align-items:center;gap:6px;background:#eefaff;border:2px solid var(--black);border-radius:3px;padding:7px 11px;font-family:var(--mono);font-size:12.5px;cursor:grab;user-select:none;touch-action:none}
+  .shotchip.sel{background:var(--pink);color:#fff}
+  .shotchip.ghost{position:fixed;pointer-events:none;z-index:999;box-shadow:4px 6px 0 rgba(0,0,0,.25);transform:rotate(-2deg)}
+  .grphead{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:20px;letter-spacing:.02em;color:#0089b3;margin:18px 0 6px}
+  .prhead{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--pink);margin:10px 0 6px;display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+  .prmembers{color:var(--mute);font-size:11px;text-transform:none;letter-spacing:0}
+  .item{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;border:2px solid var(--black);border-radius:3px;background:#fff;padding:10px;margin-bottom:8px}
+  .itemno{font-family:var(--mono);font-weight:700;color:#0089b3;font-size:13px;min-width:34px}
+  .itemscript{flex:1;min-width:180px;font-size:14.5px;white-space:pre-wrap}
+  .itemcue{min-width:150px;border:2px dashed var(--black);border-radius:2px;padding:8px 10px;display:flex;align-items:center;justify-content:center;text-align:center;background:rgba(255,255,255,.6);cursor:pointer}
+  .itemcue.set{border-style:solid;background:#eefaff}
+  .itemcue.over{outline:3px solid var(--green);outline-offset:2px}
+  .itemcue .cuelabel{font-family:var(--mono);font-size:12px}
+  .itemcue .empty{font-family:var(--mono);font-size:11px;color:var(--mute)}
+  .miniinput{font-family:var(--read);font-size:14px;padding:7px 9px;border:2px solid var(--black);border-radius:2px;background:#fff}
 
   .footer{font-family:var(--mono);font-size:11px;color:var(--mute);text-align:center;margin-top:26px;letter-spacing:.03em}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -140,102 +138,98 @@
     <div class="subh">Tuesday 2 June 2026 &nbsp;//&nbsp; call 9:00am at school &nbsp;//&nbsp; studio 10:30 to 12:30</div>
   </header>
 
+  <div class="topinfo">
+    <div class="tiline"><span class="tikey">Location</span>Channel 31 Studios, Suite 1, 2-4 Douglas Street, Southbank VIC 3006. Free parking out the front.</div>
+    <div class="tiline"><span class="tikey">Getting there</span>Group travel by train and tram. Tram: Southbank Depot / Light Rail. Train: Southern Cross.</div>
+    <div class="tiline"><span class="tikey">On the day</span>Enclosed shoes. Follow C31 staff. Phones out for selfies during the studio look, then away once shooting starts. Quiet on the floor when the tally light is on. Report any incident to the facilitator and the teacher in charge.</div>
+    <div class="tiline alert"><span class="tikey">Emergency</span>000. Nearest hospital: The Alfred, 55 Commercial Road. Nearest police: 211 Bank Street, South Melbourne.</div>
+  </div>
+
   <nav class="nav" role="tablist">
-    <button class="navtab" role="tab" aria-selected="true" data-tab="callsheet">Call Sheet</button>
-    <button class="navtab" role="tab" aria-selected="false" data-tab="runsheet">Run Sheet</button>
+    <button class="navtab" role="tab" aria-selected="true" data-tab="runsheet">Run Sheet</button>
+    <button class="navtab" role="tab" aria-selected="false" data-tab="shotlist">Shot List</button>
     <button class="navtab" role="tab" aria-selected="false" data-tab="roleboard">Role Board</button>
   </nav>
 
-  <!-- ============ CALL SHEET ============ -->
-  <section id="callsheet" class="tabpanel">
-    <div class="csband">
-      <div><span class="csl">Date</span><span class="csv">Tue 2 Jun 2026</span></div>
-      <div><span class="csl">Call</span><span class="csv">9:00am</span></div>
-      <div><span class="csl">at</span><span class="csv">School</span></div>
-      <div><span class="csl">Studio</span><span class="csv">10:30-12:30</span></div>
-    </div>
-
-    <div class="csgrid">
-      <div class="csbox">
-        <h3>Location</h3>
-        <p>Channel 31 Studios<br>Suite 1, 2-4 Douglas Street<br>Southbank VIC 3006</p>
-        <p class="mono" style="font-size:13px;color:var(--mute)">Free parking out the front</p>
-      </div>
-      <div class="csbox">
-        <h3>Getting there</h3>
-        <p class="mono" style="font-size:13.5px">Travelling as a group by train and tram.<br><br>Tram: Southbank Depot / Light Rail<br>Train: Southern Cross</p>
-      </div>
-      <div class="csbox alert">
-        <h3>If something goes wrong</h3>
-        <p class="mono" style="font-size:14px;font-weight:700">Emergency: 000</p>
-        <p>Nearest hospital: The Alfred, 55 Commercial Road, Melbourne</p>
-        <p>Nearest police: 211 Bank Street, South Melbourne</p>
-      </div>
-      <div class="csbox">
-        <h3>Groups</h3>
-        <p>About 30 students in two groups of roughly 15. One hour in the studio per group across the 10:30 to 12:30 window. While one group is shooting, the other is supervised by school staff.</p>
-      </div>
-    </div>
-
-    <div class="csbox">
-      <h3>Contacts</h3>
-      <table class="contacts">
-        <tr><td>Facilitator</td><td><span class="ph">name + mobile</span></td></tr>
-        <tr><td>C31 contact</td><td><span class="ph">name + mobile</span></td></tr>
-        <tr><td>Teacher in charge</td><td><span class="ph">name + mobile</span></td></tr>
-      </table>
-    </div>
-
-    <div class="csbox">
-      <h3>On the day</h3>
-      <ul class="onday">
-        <li>Enclosed shoes in the studio.</li>
-        <li>Follow C31 staff directions at all times.</li>
-        <li>Phones out for selfies during the studio look, then away once shooting starts.</li>
-        <li>Quiet on the floor when the tally light is on.</li>
-        <li>Report any incident or injury to the facilitator and the teacher in charge.</li>
-      </ul>
-    </div>
-  </section>
-
   <!-- ============ RUN SHEET ============ -->
-  <section id="runsheet" class="tabpanel" hidden>
-    <p class="rsnote">One group, 60 minutes. Repeats for the second group inside the 10:30 to 12:30 window.</p>
+  <section id="runsheet" class="tabpanel">
+    <p class="rsnote">Same run, both groups, across the 10:30 to 12:30 window.</p>
+
+    <div class="rsgroup">Group 1 &middot; 10:30 to 11:30</div>
     <div class="tablewrap">
       <table class="runtable">
         <thead><tr><th>Time</th><th>Segment</th><th>Who / detail</th></tr></thead>
         <tbody>
-          <tr><td class="t">0:00-0:10</td><td>Arrive, into studio, look around, selfies</td><td>All. Camera Operator checks the four camera framings with C31 staff</td></tr>
-          <tr><td class="t">0:10-0:18</td><td>C31 talk: what the station is and why it matters</td><td>Station representative, around 8 minutes</td></tr>
-          <tr><td class="t">0:18-0:22</td><td>Roles to positions, autocue loaded, quick line check</td><td>Presenters' own scripts loaded</td></tr>
-          <tr><td class="t">0:22-0:55</td><td>Shooting: pairs at the desk reading to autocue, with impromptu Brave Read slots dropped in between pairs</td><td>Presenters in twos; Vision Switch cuts the four cameras; AD, Audio, Social Media and Autocue running</td></tr>
-          <tr><td class="t">0:55-1:00</td><td>Wrap, thank yous, hand back to teachers</td><td>All</td></tr>
+          <tr><td class="t">10:30-10:40</td><td>Arrive, into studio, look around, selfies</td><td>All. Camera Operator checks the four camera framings with C31 staff</td></tr>
+          <tr><td class="t">10:40-10:48</td><td>C31 talk: what the station is and why it matters</td><td>Station representative</td></tr>
+          <tr><td class="t">10:48-10:52</td><td>Roles to positions, autocue loaded, quick line check</td><td>Presenters' own scripts loaded</td></tr>
+          <tr><td class="t">10:52-11:25</td><td>Shooting: pairs at the desk reading to autocue</td><td>Shots come off the Shot List tab. Vision Switch cuts; AD calls; Audio, Social Media and Autocue running</td></tr>
+          <tr><td class="t">11:25-11:30</td><td>Wrap, thank yous, hand back to teachers</td><td>All</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="panic">
-      <h3>Camera panic card</h3>
-      <p class="mono" style="font-size:11.5px;color:var(--mute)">For the Vision Switcher. Default framings, change to match C31 on the day.</p>
-      <ul>
-        <li>Cam 1: wide / two-shot of the desk</li>
-        <li>Cam 2: presenter left, medium close up</li>
-        <li>Cam 3: presenter right, medium close up</li>
-        <li>Cam 4: cutaway / floor</li>
-      </ul>
+    <div class="rsgroup">Group 2 &middot; 11:30 to 12:30</div>
+    <div class="tablewrap">
+      <table class="runtable">
+        <thead><tr><th>Time</th><th>Segment</th><th>Who / detail</th></tr></thead>
+        <tbody>
+          <tr><td class="t">11:30-11:40</td><td>Arrive, into studio, look around, selfies</td><td>All. Camera Operator checks the four camera framings with C31 staff</td></tr>
+          <tr><td class="t">11:40-11:48</td><td>C31 talk: what the station is and why it matters</td><td>Station representative</td></tr>
+          <tr><td class="t">11:48-11:52</td><td>Roles to positions, autocue loaded, quick line check</td><td>Presenters' own scripts loaded</td></tr>
+          <tr><td class="t">11:52-12:25</td><td>Shooting: pairs at the desk reading to autocue</td><td>Shots come off the Shot List tab. Vision Switch cuts; AD calls; Audio, Social Media and Autocue running</td></tr>
+          <tr><td class="t">12:25-12:30</td><td>Wrap, thank yous, hand back to teachers</td><td>All</td></tr>
+        </tbody>
+      </table>
     </div>
 
-    <ul class="rsnotes">
-      <li><b>Brave Read:</b> impromptu one-minute reads slotted between pairs as time allows. Short reads loaded to the autocue in advance.</li>
-      <li>Presenters read their own scripts.</li>
-      <li>The off-group is supervised by teachers and is not part of this run.</li>
-    </ul>
+    <div class="rspending">The shot-by-shot detail for the shooting block lives in the Shot List tab: each script item with its CAM cue, allocated by the AD and Vision Switcher.</div>
+  </section>
+
+  <!-- ============ SHOT LIST ============ -->
+  <section id="shotlist" class="tabpanel" hidden>
+    <div class="note"><b>Shot list.</b> Pull your script sheet, set your shots, then drag a shot onto each item, or tap a shot then tap an item. One shot per item. Tap a set cue with nothing selected to clear it. Items group by group and desk pair, with each pair's students shown from the Role Board.</div>
+
+    <div class="sec">
+      <h2><span class="n">1</span> Script</h2>
+      <div class="rosterbox">
+        <div class="sheetrow">
+          <input type="text" id="scriptUrl" placeholder="Paste your script sheet link here">
+          <button class="btn go" id="scriptPull">Pull script</button>
+        </div>
+        <div class="help">Columns: A Group (1 or 2), B Pair (A, B, C), C Item (1, 2, 3), D Script. Publish to web as CSV for a Pages site. Pulling replaces the current items.</div>
+        <details style="margin-top:10px">
+          <summary class="help">Add one item by hand</summary>
+          <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start">
+            <select id="aiGroup" class="miniinput"><option value="1">Group 1</option><option value="2">Group 2</option></select>
+            <input id="aiPair" class="miniinput" placeholder="Pair" style="width:80px">
+            <textarea id="aiScript" class="miniinput" placeholder="Script text" rows="2" style="flex:1;min-width:200px;resize:vertical"></textarea>
+            <button class="btn" id="addItem">Add</button>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h2><span class="n">2</span> Shots</h2>
+      <div class="palette" id="palette"></div>
+      <details style="margin-top:6px">
+        <summary class="help">Edit shots</summary>
+        <div class="rlist" id="shotedit" style="margin-top:8px"></div>
+        <div class="addrow"><input type="text" id="addShot" placeholder="Add a shot, e.g. Cam 2 close up"><button class="btn" id="addShotBtn">Add</button></div>
+      </details>
+    </div>
+
+    <div class="sec">
+      <h2><span class="n">3</span> Items</h2>
+      <div id="items"></div>
+    </div>
   </section>
 
   <!-- ============ ROLE BOARD ============ -->
   <section id="roleboard" class="tabpanel" hidden>
     <div class="note">
-      <b>Quick start.</b> Names start as placeholders. Pull your class list from a Google Sheet, or just type names in below. Set how many presenters you want (1 to 5). Then drag each name into a slot, or tap a name then tap a slot.
+      <b>Quick start.</b> Pull your class list from a Google Sheet, or type names in below. Set how many desk pairs you want. Then drop two students into each pair, or tap a name then tap a seat. Off-camera students go to the Control Room and Studio Floor zones.
     </div>
 
     <div class="sec">
@@ -246,11 +240,9 @@
             <input type="text" id="sheetUrl" placeholder="Paste your Google Sheet link here">
             <button class="btn go" id="pullBtn">Pull names</button>
           </div>
-          <div class="help">
-            Sheet setup: column A first names, column B on camera (<b>no</b> = off camera, blank or <b>yes</b> = on camera). For a Pages site the dependable link is File &gt; Share &gt; Publish to web &gt; CSV; paste that. A plain view-only link can work too but is flakier from a hosted page. Pulling replaces the current list.
-          </div>
+          <div class="help">Sheet setup: column A first names, column B on camera (<b>no</b> = off camera, blank or <b>yes</b> = on camera). For a Pages site the dependable link is File &gt; Share &gt; Publish to web &gt; CSV. Pulling replaces the current list.</div>
           <div class="stepper">
-            <label>Presenters this group:</label>
+            <label>Desk pairs this group:</label>
             <button class="step" id="pMinus">&minus;</button>
             <span class="stepval" id="pVal">2</span>
             <button class="step" id="pPlus">+</button>
@@ -279,36 +271,67 @@
 <script>
 "use strict";
 
-/* ---------- state ---------- */
 let nextId = 1;
 let roster = [
   {name:'Ari', offCam:true}, {name:'Bo'}, {name:'Charlie'}, {name:'Dev', offCam:true},
   {name:'Eli'}, {name:'Frankie', offCam:true}, {name:'Gem'}, {name:'Harper'},
   {name:'Indi', offCam:true}, {name:'Jaz'}, {name:'Kai'}, {name:'Lou', offCam:true},
 ].map(s=>({id:nextId++, offCam:false, ...s}));
-let presenterCount = 2;
+let pairCount = 2;
 let assign = {};
 let selChip = null, drag = null, lastDragEnd = 0;
+const LETTERS = 'ABCDEFG';
 
-/* ---------- persistence (works on Pages / as a real file; no-ops in the chat sandbox) ---------- */
+let nextItemId = 1;
+let items = [
+  {id:nextItemId++, group:'1', pair:'A', n:1, script:'Welcome to the news. (sample item, replace with the real script)', cue:null},
+  {id:nextItemId++, group:'1', pair:'A', n:2, script:'Our first story tonight... (sample)', cue:null},
+];
+let nextShotId = 5;
+let shots = [
+  {id:'sh1', label:'Cam 1 wide / 2-shot'},
+  {id:'sh2', label:'Cam 2 MCU left'},
+  {id:'sh3', label:'Cam 3 MCU right'},
+  {id:'sh4', label:'Cam 4 cutaway'},
+];
+let selShot = null, shotDrag = null, lastShotDragEnd = 0;
+
+function escapeHtml(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function escapeAttr(s){return String(s).replace(/"/g,'&quot;');}
+
 const store = {
-  key:'studioRoleBoard.v1',
-  save(){ try{ const el=document.getElementById('sheetUrl');
-    localStorage.setItem(this.key, JSON.stringify({roster,presenterCount,assign,nextId,sheetUrl:el?el.value:''}));
+  key:'studioRoleBoard.v3',
+  save(){ try{
+    const su=document.getElementById('sheetUrl'), cu=document.getElementById('scriptUrl');
+    localStorage.setItem(this.key, JSON.stringify({
+      roster,pairCount,assign,items,shots,nextId,nextItemId,nextShotId,
+      sheetUrl:su?su.value:'', scriptUrl:cu?cu.value:''
+    }));
   }catch(e){} },
   load(){ try{ const d=JSON.parse(localStorage.getItem(this.key));
-    if(d && Array.isArray(d.roster) && d.roster.length){
-      roster=d.roster; presenterCount=d.presenterCount||2; assign=d.assign||{};
-      nextId=d.nextId || (Math.max(0,...roster.map(s=>s.id))+1);
+    if(d){
+      if(Array.isArray(d.roster)&&d.roster.length) roster=d.roster;
+      if(d.pairCount) pairCount=d.pairCount;
+      if(d.assign) assign=d.assign;
+      if(Array.isArray(d.items)) items=d.items;
+      if(Array.isArray(d.shots)) shots=d.shots;
+      if(d.nextId) nextId=d.nextId;
+      if(d.nextItemId) nextItemId=d.nextItemId;
+      if(d.nextShotId) nextShotId=d.nextShotId;
+      const su=document.getElementById('sheetUrl'); if(su&&d.sheetUrl) su.value=d.sheetUrl;
+      const cu=document.getElementById('scriptUrl'); if(cu&&d.scriptUrl) cu.value=d.scriptUrl;
     }
-    return d&&d.sheetUrl?d.sheetUrl:'';
-  }catch(e){ return ''; } }
+  }catch(e){} }
 };
 
-/* ---------- roles ---------- */
+/* ---------- roles + board ---------- */
 function buildRoles(){
   const r = [];
-  for(let i=1;i<=presenterCount;i++) r.push({id:'p'+i, label:'Presenter '+i, group:'oncam'});
+  for(let i=0;i<pairCount;i++){
+    const L=LETTERS[i];
+    r.push({id:'p'+L+'1', label:'Seat 1', group:'oncam', pair:L});
+    r.push({id:'p'+L+'2', label:'Seat 2', group:'oncam', pair:L});
+  }
   r.push({id:'vision', label:'Vision Switch', group:'ctrl'});
   r.push({id:'audio', label:'Audio Desk', group:'ctrl'});
   r.push({id:'ad', label:'Assistant Director', group:'ctrl'});
@@ -320,11 +343,7 @@ function buildRoles(){
 let ROLES = buildRoles();
 const roleById = id => ROLES.find(r=>r.id===id);
 const S = id => roster.find(s=>s.id===id);
-function eligible(student, roleId){
-  const g = roleById(roleId).group;
-  if(g==='oncam') return !student.offCam;
-  return true;
-}
+function eligible(student, roleId){ return roleById(roleId).group==='oncam' ? !student.offCam : true; }
 const roleOf = sid => { for(const r in assign) if(assign[r]===sid) return r; return null; };
 function place(sid, roleId){
   const cur = roleOf(sid); if(cur) delete assign[cur];
@@ -336,8 +355,8 @@ function place(sid, roleId){
   return true;
 }
 function pruneAssign(){ for(const r in assign){ if(!S(assign[r]) || !roleById(r)) delete assign[r]; } }
+function pairMembers(L){ return ['1','2'].map(n=>assign['p'+L+n]).filter(Boolean).map(id=>S(id)?S(id).name:'').filter(Boolean); }
 
-/* ---------- status ---------- */
 function setTally(ready){
   const t=document.getElementById('tally'), txt=document.getElementById('tcText');
   if(ready){t.classList.add('live');txt.textContent='READY // ROLL TAPE';}
@@ -358,14 +377,12 @@ function renderStatus(){
                   : `<span class="ok">&#10003; off-camera students placed</span>`}
      ${ready? '<span class="ok">&#9679; READY TO ROLL</span>':''}`;
 }
-
-/* ---------- roster editor ---------- */
 function renderRoster(){
-  document.getElementById('pVal').textContent = presenterCount;
+  document.getElementById('pVal').textContent = pairCount;
   const list = document.getElementById('rlist');
   list.innerHTML = roster.map(s=>`
     <div class="redit">
-      <input class="nm" data-rename="${s.id}" value="${s.name.replace(/"/g,'&quot;')}">
+      <input class="nm" data-rename="${s.id}" value="${escapeAttr(s.name)}">
       <button class="camtog ${s.offCam?'off':''}" data-cam="${s.id}">${s.offCam?'off cam':'cam ok'}</button>
       <button class="del" data-del="${s.id}" title="remove">&times;</button>
     </div>`).join('');
@@ -381,8 +398,6 @@ function addStudent(){
   const inp=document.getElementById('addName'); const v=inp.value.trim();
   if(!v) return; roster.push({id:nextId++, name:v, offCam:false}); inp.value=''; renderAll(); inp.focus();
 }
-
-/* ---------- google sheet pull ---------- */
 function parseCSV(text){
   const rows=[]; let row=[],cur='',q=false;
   for(let i=0;i<text.length;i++){const ch=text[i];
@@ -406,21 +421,23 @@ async function pullSheet(){
     const rows=parseCSV(await res.text()).filter(r=>r.join('').trim()!=='');
     if(rows.length && /name/i.test(rows[0][0])) rows.shift();
     const fresh=rows.map(r=>{
-      const name=(r[0]||'').trim();
-      const cam=(r[1]||'').trim().toLowerCase();
+      const name=(r[0]||'').trim(); const cam=(r[1]||'').trim().toLowerCase();
       const offCam=['no','n','false','0','off'].includes(cam);
       return name?{id:nextId++, name, offCam}:null;
     }).filter(Boolean);
     if(!fresh.length){ toast('Sheet was empty'); return; }
     roster=fresh; assign={}; renderAll(); toast('Loaded '+fresh.length+' names');
-  }catch(err){
-    toast('Could not reach the sheet (signal, or not link-shared)');
-  }
+  }catch(err){ toast('Could not reach the sheet (signal, or not link-shared)'); }
 }
-
-/* ---------- board ---------- */
 function chip(s){
-  return `<span class="chip ${s.offCam?'off':''} ${selChip===s.id?'sel':''}" data-chip="${s.id}">${s.name}${s.offCam?' <span class="badge">off cam</span>':''}</span>`;
+  return `<span class="chip ${s.offCam?'off':''} ${selChip===s.id?'sel':''}" data-chip="${s.id}">${escapeHtml(s.name)}${s.offCam?' <span class="badge">off cam</span>':''}</span>`;
+}
+function boardSlot(role){
+  const sid=assign[role.id];
+  const inner = sid
+    ? `<span class="chip ${S(sid).offCam?'off':''}" data-placed="${sid}">${escapeHtml(S(sid).name)} <span style="font-family:var(--mono);font-size:10px;color:var(--mute)">&times;</span></span>`
+    : `<span class="empty">drop here</span>`;
+  return `<div class="slot" data-role="${role.id}"><span class="rname">${role.label}</span>${inner}</div>`;
 }
 function renderBoard(){
   const placed=new Set(Object.values(assign));
@@ -429,17 +446,15 @@ function renderBoard(){
     `<span class="pool-label">Not placed / rotation (spares rotate through the desk)</span>` +
     (poolStudents.length? poolStudents.map(chip).join('')
       : '<span class="empty" style="font-family:var(--mono);font-size:12px;color:var(--mute)">everyone is placed</span>');
-  const slot = role=>{
-    const sid=assign[role.id];
-    const inner = sid
-      ? `<span class="chip ${S(sid).offCam?'off':''}" data-placed="${sid}">${S(sid).name} <span style="font-family:var(--mono);font-size:10px;color:var(--mute)">&times;</span></span>`
-      : `<span class="empty">drop here</span>`;
-    return `<div class="slot" data-role="${role.id}"><span class="rname">${role.label}</span>${inner}</div>`;
-  };
+  const pairLetters = [...new Set(ROLES.filter(r=>r.group==='oncam').map(r=>r.pair))];
+  const oncamHTML = pairLetters.map(L=>{
+    const seats = ROLES.filter(r=>r.group==='oncam' && r.pair===L);
+    return `<div class="pairgroup"><div class="pairhdr">Pair ${L}</div>${seats.map(boardSlot).join('')}</div>`;
+  }).join('');
   document.getElementById('zones').innerHTML = `
-    <div class="zone oncam"><h3>On Camera</h3><div class="ztag">at the desk</div>${ROLES.filter(r=>r.group==='oncam').map(slot).join('')}</div>
-    <div class="zone ctrl"><h3>Control Room</h3><div class="ztag">off camera</div>${ROLES.filter(r=>r.group==='ctrl').map(slot).join('')}</div>
-    <div class="zone floor"><h3>Studio Floor</h3><div class="ztag">off camera</div>${ROLES.filter(r=>r.group==='floor').map(slot).join('')}</div>`;
+    <div class="zone oncam"><h3>On Camera</h3><div class="ztag">desk pairs</div>${oncamHTML}</div>
+    <div class="zone ctrl"><h3>Control Room</h3><div class="ztag">off camera</div>${ROLES.filter(r=>r.group==='ctrl').map(boardSlot).join('')}</div>
+    <div class="zone floor"><h3>Studio Floor</h3><div class="ztag">off camera</div>${ROLES.filter(r=>r.group==='floor').map(boardSlot).join('')}</div>`;
   document.querySelectorAll('#roleboard [data-placed]').forEach(el=>el.onclick=e=>{e.stopPropagation();place(+el.dataset.placed,null);renderAll();});
   document.querySelectorAll('#roleboard [data-chip]').forEach(el=>{
     el.addEventListener('pointerdown',e=>startDrag(e,+el.dataset.chip));
@@ -471,30 +486,138 @@ function endDrag(e){
   document.body.removeChild(drag.ghost); const sid=drag.sid; drag=null; lastDragEnd=Date.now();
   if(sl) tryDrop(sid, sl.dataset.role, sl);
 }
+function setPairs(n){ pairCount=Math.max(1,Math.min(7,n)); ROLES=buildRoles(); pruneAssign(); renderAll(); }
+
+/* ---------- shot list ---------- */
+const shotById = id => shots.find(s=>s.id===id);
+function renderShots(){
+  const pal=document.getElementById('palette');
+  pal.innerHTML = shots.length
+    ? shots.map(sh=>`<span class="shotchip ${selShot===sh.id?'sel':''}" data-shot="${sh.id}">${escapeHtml(sh.label)}</span>`).join('')
+    : '<span class="help">No shots yet, add some below.</span>';
+  pal.querySelectorAll('[data-shot]').forEach(el=>{
+    el.addEventListener('pointerdown',e=>startShotDrag(e,el.dataset.shot));
+    el.onclick=()=>toggleShotSel(el.dataset.shot);
+  });
+  const ed=document.getElementById('shotedit');
+  ed.innerHTML = shots.map(sh=>`
+    <div class="redit">
+      <input class="nm" data-shotname="${sh.id}" value="${escapeAttr(sh.label)}">
+      <button class="del" data-shotdel="${sh.id}">&times;</button>
+    </div>`).join('');
+  ed.querySelectorAll('[data-shotname]').forEach(inp=>inp.onchange=()=>{shotById(inp.dataset.shotname).label=inp.value.trim()||'(shot)';renderShotList();store.save();});
+  ed.querySelectorAll('[data-shotdel]').forEach(b=>b.onclick=()=>{const id=b.dataset.shotdel; shots=shots.filter(s=>s.id!==id); items.forEach(it=>{if(it.cue===id)it.cue=null;}); if(selShot===id)selShot=null; renderShotList(); store.save();});
+}
+function addShot(){
+  const inp=document.getElementById('addShot'); const v=inp.value.trim(); if(!v) return;
+  shots.push({id:'sh'+(nextShotId++), label:v}); inp.value=''; renderShotList(); store.save(); inp.focus();
+}
+function renderItems(){
+  const wrap=document.getElementById('items');
+  if(!items.length){ wrap.innerHTML='<div class="help">No items yet. Pull a script sheet, or add one by hand above.</div>'; return; }
+  const sorted=[...items].sort((a,b)=> String(a.group).localeCompare(String(b.group)) || String(a.pair).localeCompare(String(b.pair)) || (a.n-b.n));
+  let html=''; let curG=null, curP=null;
+  sorted.forEach(it=>{
+    if(it.group!==curG){ curG=it.group; curP=null; html+=`<div class="grphead">Group ${escapeHtml(it.group)}</div>`; }
+    if(it.pair!==curP){ curP=it.pair; const mem=pairMembers(it.pair);
+      html+=`<div class="prhead">Pair ${escapeHtml(it.pair)} <span class="prmembers">${mem.length?escapeHtml(mem.join(' + ')):'unassigned on the board'}</span></div>`; }
+    const cue=it.cue?shotById(it.cue):null;
+    html+=`<div class="item">
+      <span class="itemno">${escapeHtml(it.pair)}${it.n}</span>
+      <div class="itemscript">${escapeHtml(it.script)}</div>
+      <div class="itemcue ${cue?'set':''}" data-item="${it.id}">${cue?`<span class="cuelabel">${escapeHtml(cue.label)}</span>`:'<span class="empty">drop a shot</span>'}</div>
+    </div>`;
+  });
+  wrap.innerHTML=html;
+  wrap.querySelectorAll('.itemcue').forEach(c=>c.addEventListener('click',()=>onCueClick(+c.dataset.item)));
+}
+function onCueClick(itemId){
+  if(Date.now()-lastShotDragEnd<300) return;
+  const it=items.find(x=>x.id===itemId); if(!it) return;
+  if(selShot!=null){ it.cue=selShot; selShot=null; }
+  else if(it.cue){ it.cue=null; }
+  renderShotList(); store.save();
+}
+function toggleShotSel(id){ if(Date.now()-lastShotDragEnd<300) return; selShot=(selShot===id)?null:id; renderShots(); }
+function startShotDrag(e,shotId){
+  e.preventDefault();
+  const sh=shotById(shotId); if(!sh) return;
+  const g=document.createElement('span'); g.className='shotchip ghost'; g.textContent=sh.label;
+  document.body.appendChild(g); shotDrag={shotId,ghost:g}; moveShotGhost(e);
+  window.addEventListener('pointermove',moveShotGhost); window.addEventListener('pointerup',endShotDrag);
+}
+function moveShotGhost(e){
+  if(!shotDrag)return;
+  shotDrag.ghost.style.left=(e.clientX+8)+'px'; shotDrag.ghost.style.top=(e.clientY-14)+'px';
+  document.querySelectorAll('#shotlist .itemcue').forEach(c=>c.classList.remove('over'));
+  const el=document.elementFromPoint(e.clientX,e.clientY); const c=el&&el.closest('.itemcue');
+  if(c) c.classList.add('over');
+}
+function endShotDrag(e){
+  window.removeEventListener('pointermove',moveShotGhost); window.removeEventListener('pointerup',endShotDrag);
+  const el=document.elementFromPoint(e.clientX,e.clientY); const c=el&&el.closest('.itemcue');
+  document.body.removeChild(shotDrag.ghost); const shotId=shotDrag.shotId; shotDrag=null; lastShotDragEnd=Date.now();
+  if(c){ const it=items.find(x=>x.id===+c.dataset.item); if(it){ it.cue=shotId; renderShotList(); store.save(); toast('Shot set'); } }
+}
+async function pullScript(){
+  const url=document.getElementById('scriptUrl').value.trim();
+  let csvUrl=null;
+  if(/output=csv/i.test(url) || /\/pub\b/i.test(url)){ csvUrl=url; }
+  else { const m=url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/); if(m) csvUrl=`https://docs.google.com/spreadsheets/d/${m[1]}/gviz/tq?tqx=out:csv`; }
+  if(!csvUrl){ toast('That does not look like a Google Sheet link'); return; }
+  toast('Pulling script...');
+  try{
+    const res=await fetch(csvUrl); if(!res.ok) throw new Error('http');
+    const rows=parseCSV(await res.text()).filter(r=>r.join('').trim()!=='');
+    if(rows.length && /group|pair|script|item/i.test(rows[0].join(' '))) rows.shift();
+    const fresh=rows.map(r=>{
+      const group=(r[0]||'1').trim()||'1';
+      const pair=((r[1]||'A').trim()||'A').toUpperCase();
+      const n=parseInt((r[2]||'').trim())||0;
+      const script=(r[3]||'').trim();
+      return script?{id:nextItemId++, group, pair, n, script, cue:null}:null;
+    }).filter(Boolean);
+    if(!fresh.length){ toast('Sheet had no script rows'); return; }
+    items=fresh; renderShotList(); store.save(); toast('Loaded '+fresh.length+' items');
+  }catch(e){ toast('Could not reach the script sheet'); }
+}
+function addItemManual(){
+  const g=document.getElementById('aiGroup').value;
+  const p=(document.getElementById('aiPair').value||'A').trim().toUpperCase();
+  const sc=document.getElementById('aiScript').value.trim();
+  if(!sc){ toast('Add some script text'); return; }
+  const n=items.filter(it=>it.group===g && it.pair===p).reduce((m,it)=>Math.max(m,it.n),0)+1;
+  items.push({id:nextItemId++, group:g, pair:p, n, script:sc, cue:null});
+  document.getElementById('aiScript').value='';
+  renderShotList(); store.save();
+}
+function renderShotList(){ renderShots(); renderItems(); }
 
 /* ---------- wiring ---------- */
-function setPresenters(n){ presenterCount=Math.max(1,Math.min(5,n)); ROLES=buildRoles(); pruneAssign(); renderAll(); }
-function renderAll(){ ROLES=buildRoles(); renderRoster(); renderBoard(); renderStatus(); store.save(); }
+function renderAll(){ ROLES=buildRoles(); renderRoster(); renderBoard(); renderStatus(); renderShotList(); store.save(); }
 let toastTimer=null;
 function toast(m){const el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),1800);}
 
-document.getElementById('pPlus').onclick=()=>setPresenters(presenterCount+1);
-document.getElementById('pMinus').onclick=()=>setPresenters(presenterCount-1);
+document.getElementById('pPlus').onclick=()=>setPairs(pairCount+1);
+document.getElementById('pMinus').onclick=()=>setPairs(pairCount-1);
 document.getElementById('pullBtn').onclick=pullSheet;
 document.getElementById('addBtn').onclick=addStudent;
 document.getElementById('addName').addEventListener('keydown',e=>{if(e.key==='Enter')addStudent();});
 document.getElementById('sheetUrl').addEventListener('change',()=>store.save());
-const savedUrl = store.load();
-if(savedUrl) document.getElementById('sheetUrl').value = savedUrl;
+document.getElementById('scriptPull').onclick=pullScript;
+document.getElementById('addItem').onclick=addItemManual;
+document.getElementById('addShotBtn').onclick=addShot;
+document.getElementById('addShot').addEventListener('keydown',e=>{if(e.key==='Enter')addShot();});
+document.getElementById('scriptUrl').addEventListener('change',()=>store.save());
 
-/* ---------- nav ---------- */
 document.querySelectorAll('.navtab').forEach(t=>t.onclick=()=>{
   const id=t.dataset.tab;
   document.querySelectorAll('.navtab').forEach(x=>x.setAttribute('aria-selected', x===t));
-  ['callsheet','runsheet','roleboard'].forEach(s=>{document.getElementById(s).hidden=(s!==id);});
+  ['runsheet','shotlist','roleboard'].forEach(s=>{document.getElementById(s).hidden=(s!==id);});
   window.scrollTo(0,0);
 });
 
+store.load();
 renderAll();
 </script>
 </body>
