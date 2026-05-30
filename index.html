@@ -16,26 +16,31 @@
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--read);line-height:1.5;padding:0 0 70px}
-  .bars{display:flex;height:8px;width:100%}
+  .bars{display:flex;height:13px;width:100%}
   .bars span{flex:1}
-  .b1{background:var(--cyan)}.b2{background:var(--yellow)}.b3{background:var(--green)}.b4{background:var(--pink)}.b5{background:#9b5de5}.b6{background:var(--pink)}.b7{background:var(--cyan)}
+  .b1{background:var(--cyan)}.b2{background:var(--yellow)}.b3{background:var(--green)}.b4{background:var(--pink)}.b5{background:#9b5de5}
   header{background:var(--black);color:var(--cream);padding:18px 20px 16px}
-  .tc{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:8px;text-transform:uppercase}
-  .dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green);display:inline-block}
+  .tc{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .rec{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.16em;color:#ff3b3b;text-transform:uppercase}
+  .recdot{width:13px;height:13px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 10px #ff3b3b;display:inline-block;animation:recblink 1.3s infinite}
+  @keyframes recblink{0%,100%{opacity:1}50%{opacity:.25}}
+  .ch{font-family:var(--display);font-weight:400;font-size:clamp(22px,5.5vw,30px);letter-spacing:.03em;text-transform:uppercase;color:var(--cream);line-height:1}
   h1{font-family:var(--display);font-weight:400;margin:0;font-size:clamp(28px,7vw,46px);letter-spacing:.01em;line-height:.95;text-transform:uppercase}
   h1 .hi{color:var(--pink)}
-  .subh{font-family:var(--mono);font-size:12.5px;color:var(--cyan);margin-top:6px;letter-spacing:.04em}
+  .subh{font-family:var(--mono);font-size:clamp(13px,3.4vw,16px);color:var(--cyan);margin-top:8px;letter-spacing:.04em;font-weight:700}
 
-  .topinfo{border:2px solid var(--black);border-radius:3px;margin:14px 16px 0;background:#fff;overflow:hidden}
-  .tiline{padding:8px 13px;border-bottom:1.5px dotted #d8d1bf;font-size:13px}
+  .infogrid{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 16px 0}
+  @media(min-width:680px){.infogrid{grid-template-columns:1fr 1fr;align-items:start}}
+  .topinfo{border:2px solid var(--black);border-radius:3px;background:#fff;overflow:hidden;margin:0}
+  .tiline{padding:9px 13px;border-bottom:1.5px dotted #d8d1bf;font-size:13.5px}
   .tiline:last-child{border-bottom:0}
   .tiline.alert{background:#fff3f9}
-  .tikey{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--pink);margin-right:8px}
+  .tikey{display:block;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--pink);margin-bottom:3px}
   .tiline.alert .tikey{color:#c00060}
-  .reminders{border:2px solid var(--black);border-radius:3px;margin:12px 16px 0;background:#fff6df;padding:10px 14px}
-  .remhdr{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:18px;letter-spacing:.02em;color:var(--pink);margin:0 0 6px}
-  .remlist{margin:0;padding-left:20px;font-size:14px}
-  .remlist li{margin-bottom:4px}
+  .reminders{border:2px solid var(--black);border-radius:3px;background:#fff6df;padding:0;overflow:hidden;margin:0}
+  .remhdr{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:17px;letter-spacing:.02em;color:#fff;background:var(--pink);margin:0;padding:7px 13px}
+  .remlist{margin:0;padding:10px 14px 10px 32px;font-size:13.5px}
+  .remlist li{margin-bottom:5px}
 
   nav.nav{position:sticky;top:0;z-index:50;display:flex;background:var(--black);border-bottom:3px solid var(--pink);margin-top:14px;overflow-x:auto}
   .navtab{flex:1 0 auto;font-family:var(--display);font-size:clamp(13px,3.6vw,18px);letter-spacing:.02em;text-transform:uppercase;background:var(--black);color:var(--cream);border:0;border-right:1px solid #2a2a2a;padding:13px 14px;cursor:pointer;white-space:nowrap}
@@ -70,7 +75,8 @@
   .pairblock{border:3px solid var(--black);border-radius:3px;margin-bottom:18px;overflow:hidden;background:#fff}
   .pairtitle{background:var(--black);color:var(--cream);font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:19px;letter-spacing:.02em;padding:9px 13px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
   .pairtitle .pp{color:var(--pink)}
-  .pairtitle .who{font-family:var(--mono);font-size:12px;letter-spacing:.02em;text-transform:none;color:var(--cyan)}
+  .pairtitle .who{font-family:var(--mono);font-size:12px;letter-spacing:.02em;text-transform:none;color:var(--cyan);display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .whoname{background:rgba(255,255,255,.92);padding:1px 7px;border-radius:10px;font-weight:700}
   .callstrip{background:#fff0f7;border-bottom:2px solid var(--black);padding:10px 13px}
   .callstrip .clab{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--pink);margin-bottom:5px}
   .callseq{display:flex;flex-direction:column;gap:3px}
@@ -81,7 +87,8 @@
   .ditem{display:grid;grid-template-columns:1fr 132px;gap:10px;padding:11px 13px;border-bottom:1.5px dotted #d8d1bf;align-items:start}
   .ditem:last-child{border-bottom:0}
   .ditem .scr{font-size:15px;white-space:pre-wrap;line-height:1.5}
-  .ditem .scr .pname{background:var(--yellow);padding:0 4px;border-radius:2px;font-weight:600}
+  .ditem .scr .pname{padding:0 6px;border-radius:10px;font-weight:700;border:1.5px solid currentColor}
+  .pname{background:#fff}
   .ditem .scr .nametag{background:#ffe1f0;padding:0 4px;border-radius:2px;font-family:var(--mono);font-size:13px}
   .ditem .cam{font-family:var(--mono);font-size:12.5px;color:#0089b3;border:2px solid #bfe9f7;border-radius:2px;padding:6px 8px;text-align:center;align-self:start}
   .ditem .cam.none{color:var(--mute);border-color:#e3ddcd}
@@ -101,7 +108,10 @@
   .allocrow .k{font-family:var(--mono);font-size:12px;color:#0089b3;text-transform:uppercase;letter-spacing:.02em}
   .allocrow .v{font-weight:600}
   .allocrow .v.un{font-weight:400;color:var(--mute);font-style:italic}
-  .subhd{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--pink);margin:16px 0 6px}
+  .subhd{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:23px;letter-spacing:.02em;color:#fff;background:var(--black);padding:7px 14px;border-radius:3px;margin:22px 0 10px;border-left:8px solid var(--pink)}
+  .subhd:first-child{margin-top:2px}
+  .pcolour{font-weight:700}
+  .allocrow .v.pcolour{font-weight:700}
 
   /* brave reads */
   .bravelist{display:flex;flex-direction:column;gap:8px}
@@ -132,33 +142,35 @@
 </style>
 </head>
 <body>
-  <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span><span class="b5"></span><span class="b6"></span><span class="b7"></span></div>
+  <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span><span class="b5"></span></div>
   <header>
-    <div class="tc"><span class="dot"></span> Channel 31 // Southbank</div>
+    <div class="tc"><span class="rec"><span class="recdot"></span>Rec</span> <span class="ch">Channel 31</span></div>
     <h1>C31 Studio <span class="hi">Excursion</span></h1>
-    <div class="subh">Tuesday 2 June 2026 &nbsp;//&nbsp; leave from school at 9am &nbsp;//&nbsp; studio 10:30 to 12:30</div>
+    <div class="subh">Tuesday 2 June 2026 &nbsp;//&nbsp; CALL TIME 9AM AT SCHOOL &nbsp;//&nbsp; studio 10:30 to 12:30</div>
   </header>
 
-  <div class="topinfo">
-    <div class="tiline"><span class="tikey">Address</span>Channel 31 Studios, Suite 1, 2-4 Douglas Street, Southbank VIC 3006.</div>
-    <div class="tiline"><span class="tikey">Getting there</span>Train to Southern Cross, then the route 96 light rail (boards right outside Southern Cross on Spencer Street) to Clarendon Street Junction, a short walk from the studio. Roughly every 7 to 8 minutes through the day. Route 109 also serves that stop.</div>
-    <div class="tiline alert"><span class="tikey">Emergency contacts</span>Hospital: The Alfred, 55 Commercial Road. Police: 211 Bank Street, South Melbourne.</div>
-  </div>
+  <div class="infogrid">
+    <div class="topinfo">
+      <div class="tiline"><span class="tikey">Address</span>C31 Studios, Suite 1, 2-4 Douglas Street, Southbank.</div>
+      <div class="tiline"><span class="tikey">Getting there</span>Train to Southern Cross, then the route 96 tram to Clarendon Street Junction. A short walk from there. Trams every 7 to 8 minutes.</div>
+      <div class="tiline alert"><span class="tikey">Emergency contacts</span>Hospital: The Alfred, 55 Commercial Road. Police: 211 Bank Street, South Melbourne.</div>
+    </div>
 
-  <div class="reminders">
-    <div class="remhdr">Reminders</div>
-    <ul class="remlist">
-      <li>Enclosed shoes in the studio.</li>
-      <li>Follow C31 staff directions at all times.</li>
-      <li>Quiet on the floor when the tally light is on.</li>
-    </ul>
+    <div class="reminders">
+      <div class="remhdr">Reminders</div>
+      <ul class="remlist">
+        <li>Enclosed shoes in the studio.</li>
+        <li>Follow C31 staff at all times.</li>
+        <li>Quiet on the floor when the tally light is on.</li>
+      </ul>
+    </div>
   </div>
 
   <nav class="nav" role="tablist">
     <button class="navtab" role="tab" aria-selected="true" data-tab="runsheet">Run Sheet</button>
     <button class="navtab" role="tab" aria-selected="false" data-tab="agenda">Agenda</button>
     <button class="navtab" role="tab" aria-selected="false" data-tab="allocation">Roles</button>
-    <button class="navtab" role="tab" aria-selected="false" data-tab="brave">Brave Reads</button>
+    <button class="navtab" role="tab" aria-selected="false" data-tab="brave">Very Factual News</button>
     <button class="navtab" role="tab" aria-selected="false" data-tab="setup">Setup</button>
   </nav>
 
@@ -173,7 +185,17 @@
 
   <!-- ============ AGENDA (static clock plan) ============ -->
   <section id="agenda" class="tabpanel" hidden>
-    <p class="rsnote">The shape of the day. Both groups, across the 10:30 to 12:30 window.</p>
+    <div class="rsgroup">Before the studio</div>
+    <div class="tablewrap">
+      <table class="runtable">
+        <thead><tr><th>Time</th><th>Segment</th><th>Who / detail</th></tr></thead>
+        <tbody>
+          <tr><td class="t">9:00</td><td>Call time at school</td><td>All. Roll call, gear, head off</td></tr>
+          <tr><td class="t">9:15-10:30</td><td>Travel to the studio</td><td>Train to Southern Cross, then the route 96 tram</td></tr>
+          <tr><td class="t">On the train</td><td>Pre-production meeting</td><td>Run through roles, the order of the day, and the calls</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="rsgroup">Group 1 &middot; 10:30 to 11:30</div>
     <div class="tablewrap">
@@ -353,6 +375,13 @@ async function loadAll(){
 }
 
 /* ---------- lookups ---------- */
+const PALETTE=['#c8006e','#0070a8','#1f8f3e','#7b3ff2','#bf5a00','#a4148c','#2a6cb0','#6b8e00','#0e8a8a','#b02a4e'];
+function colourFor(name){
+  if(!name) return '#6b6b6b';
+  let h=0; const s=String(name).trim().toLowerCase();
+  for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; }
+  return PALETTE[h%PALETTE.length];
+}
 function presenterName(group,pair,seat){
   const r=DATA.presenters.find(p=>p.group===group && p.pair===pair && String(p.seat)===String(seat));
   return r?r.name:null;
@@ -368,7 +397,8 @@ function subTags(script,group,pair){
   let s=escapeHtml(script);
   s=s.replace(/&lt;P([1-4])&gt;/g,(m,d)=>{
     const nm=presenterName(group,pair,d);
-    return nm?`<span class="pname">${escapeHtml(nm)}</span>`:`<span class="pname">P${d}</span>`;
+    if(nm) return `<span class="pname" style="color:${colourFor(nm)}">${escapeHtml(nm)}</span>`;
+    return `<span class="pname" style="color:var(--mute)">P${d}</span>`;
   });
   s=s.replace(/&lt;NAME&gt;/g,'<span class="nametag">&lt;NAME&gt;</span>');
   return s;
@@ -390,14 +420,14 @@ function renderRunSheet(){
     html+=`<div class="rsgroup">Group ${escapeHtml(gk)}</div>`;
     const crew=crewForGroup(gk);
     if(crew.length){
-      html+=`<div class="crewstrip"><b>Crew</b><br>${crew.map(c=>`<span class="cw">${escapeHtml(c.role)}: <span class="nm">${escapeHtml(c.name)}</span></span>`).join('')}</div>`;
+      html+=`<div class="crewstrip"><b>Crew</b><br>${crew.map(c=>`<span class="cw">${escapeHtml(c.role)}: <span class="nm" style="color:${colourFor(c.name)}">${escapeHtml(c.name)}</span></span>`).join('')}</div>`;
     }
     gmap[gk].order.forEach(pk=>{
       const seats=DATA.presenters.filter(p=>p.group===gk&&p.pair===pk).sort((a,b)=>String(a.seat).localeCompare(String(b.seat)));
-      const who=seats.length?seats.map(s=>s.name).join(' + '):'unassigned';
+      const whoHtml=seats.length?seats.map(s=>`<span class="whoname" style="color:${colourFor(s.name)}">${escapeHtml(s.name)}</span>`).join(''):'<span class="whoname" style="color:#6b6b6b">unassigned</span>';
       const clap=clapperName(gk);
       html+=`<div class="pairblock">
-        <div class="pairtitle"><span>Pair <span class="pp">${escapeHtml(pk)}</span></span><span class="who">${escapeHtml(who)}</span></div>
+        <div class="pairtitle"><span>Pair <span class="pp">${escapeHtml(pk)}</span></span><span class="who">${whoHtml}</span></div>
         <div class="callstrip">
           <div class="clab">Roll in</div>
           <div class="callseq">
@@ -436,13 +466,13 @@ function renderAllocation(){
     if(pairs.length){
       pairs.forEach(pk=>{
         const seats=pres.filter(p=>p.pair===pk).sort((a,b)=>String(a.seat).localeCompare(String(b.seat)));
-        seats.forEach(s=>{ html+=`<div class="allocrow"><span class="k">Pair ${escapeHtml(pk)} &middot; seat ${escapeHtml(s.seat)}</span><span class="v">${escapeHtml(s.name)}</span></div>`; });
+        seats.forEach(s=>{ html+=`<div class="allocrow"><span class="k">Pair ${escapeHtml(pk)} &middot; seat ${escapeHtml(s.seat)}</span><span class="v pcolour" style="color:${colourFor(s.name)}">${escapeHtml(s.name)}</span></div>`; });
       });
     } else html+=`<div class="allocrow"><span class="v un">none yet</span></div>`;
     html+=`</div>`;
     const crew=crewForGroup(g);
     html+=`<div class="alloccard"><h3>Crew</h3>`;
-    if(crew.length){ crew.forEach(c=>{ html+=`<div class="allocrow"><span class="k">${escapeHtml(c.role)}</span><span class="v">${escapeHtml(c.name)}</span></div>`; }); }
+    if(crew.length){ crew.forEach(c=>{ html+=`<div class="allocrow"><span class="k">${escapeHtml(c.role)}</span><span class="v pcolour" style="color:${colourFor(c.name)}">${escapeHtml(c.name)}</span></div>`; }); }
     else html+=`<div class="allocrow"><span class="v un">none yet</span></div>`;
     html+=`</div></div>`;
   });
@@ -463,7 +493,7 @@ function renderBrave(){
     return;
   }
   if(!DATA.brave.length){ wrap.innerHTML='<div class="empty">No brave reads yet. Wire the Brave reads sheet in Setup.</div>'; return; }
-  wrap.innerHTML=`<div class="note">Spare-time reads for the wiggle room. Tap one to open it big for the reader. The reader says their own name where it shows &lt;NAME&gt;.</div><div class="bravelist">`+
+  wrap.innerHTML=`<div class="note">Very Factual News, for the wiggle room. Tap one to open it big for the reader. The reader says their own name where it shows &lt;NAME&gt;.</div><div class="bravelist">`+
     DATA.brave.map((b,i)=>`<div class="bravecard" data-brave="${i}"><span class="bt">${escapeHtml(b.title)}</span><span class="go">Open &rarr;</span></div>`).join('')+`</div>`;
   wrap.querySelectorAll('[data-brave]').forEach(el=>el.onclick=()=>{braveOpen=+el.dataset.brave;renderBrave();window.scrollTo(0,0);});
 }
