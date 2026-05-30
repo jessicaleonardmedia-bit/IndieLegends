@@ -333,6 +333,7 @@ const SAMPLE = {
 
 let DATA = {script:[],presenters:[],crew:[],brave:[],page:{}};
 let usingSample = {script:true,presenters:true,crew:true,brave:true,page:true};
+let loading = false;
 let braveOpen = null;
 const LS = 'c31SheetUrls.v1';
 
@@ -369,10 +370,14 @@ function dropHeader(rows, hint){
 }
 async function fetchRows(url){
   const csvUrl=toCsvUrl(url); if(!csvUrl) throw new Error('nolink');
-  const res=await fetch(csvUrl); if(!res.ok) throw new Error('http'); 
+  const bust=csvUrl+(csvUrl.indexOf('?')>=0?'&':'?')+'_cb='+Date.now();
+  const res=await fetch(bust,{cache:'no-store'}); if(!res.ok) throw new Error('http');
   return parseCSV(await res.text()).filter(r=>r.join('').trim()!=='');
 }
 async function loadAll(){
+  if(loading) return;
+  loading=true;
+  try{
   const stampEls=[document.getElementById('stamp'),document.getElementById('stamp2'),document.getElementById('stamp3')];
   stampEls.forEach(e=>{if(e){e.classList.remove('err');e.textContent='Loading...';}});
   const keys=['script','presenters','crew','brave','page'];
@@ -406,6 +411,7 @@ async function loadAll(){
   const msg=(anySample?'Sample data showing. Wire the sheets in Setup. ':'')+'Updated '+t.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
   stampEls.forEach(e=>{if(e){e.textContent=msg; if(anySample)e.classList.add('err');}});
   renderPage(); renderRunSheet(); renderAllocation(); renderBrave();
+  } finally { loading=false; }
 }
 function renderSrcStatus(STATUS){
   const el=document.getElementById('srcStatus'); if(!el) return;
