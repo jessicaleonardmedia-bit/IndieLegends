@@ -265,6 +265,10 @@
       Brave reads: Title, Script. Leave &lt;NAME&gt; as is, the reader says their own name.<br>
       Page: Key, Value. Keys: date, calltime, studio, address, gettingthere, emergency. For the reminders list, use a row keyed reminder for each one, as many as you like.
     </div>
+    <div class="help" style="margin-top:14px;border-top:1.5px solid #d8d1bf;padding-top:12px">
+      <div style="font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:#0089b3;margin-bottom:6px">Source status</div>
+      <div id="srcStatus">Load to see status.</div>
+    </div>
   </section>
 
   <div class="footer">Working pack. Business name to be confirmed.</div>
@@ -347,7 +351,12 @@ function parseCSV(text){
 }
 function toCsvUrl(url){
   if(!url) return null;
-  if(/output=csv/i.test(url) || /\/pub\b/i.test(url)) return url;
+  url=url.trim();
+  if(/\/pub(html)?\b/i.test(url) || /output=csv/i.test(url)){
+    let u=url.replace(/pubhtml/i,'pub');
+    if(!/output=csv/i.test(u)) u += (u.indexOf('?')>=0?'&':'?') + 'output=csv';
+    return u;
+  }
   const m=url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
   return m?`https://docs.google.com/spreadsheets/d/${m[1]}/gviz/tq?tqx=out:csv`:null;
 }
@@ -367,9 +376,10 @@ async function loadAll(){
   const stampEls=[document.getElementById('stamp'),document.getElementById('stamp2'),document.getElementById('stamp3')];
   stampEls.forEach(e=>{if(e){e.classList.remove('err');e.textContent='Loading...';}});
   const keys=['script','presenters','crew','brave','page'];
+  const STATUS={};
   for(const k of keys){
     const url=urlFor(k);
-    if(!url){ DATA[k]=SAMPLE[k]; usingSample[k]=true; continue; }
+    if(!url){ DATA[k]=SAMPLE[k]; usingSample[k]=true; STATUS[k]={state:'nolink'}; continue; }
     try{
       let rows=await fetchRows(url);
       if(k==='script'){ rows=dropHeader(rows,'group|pair|cam|script'); DATA[k]=rows.map(r=>({group:(r[0]||'1').trim()||'1',pair:((r[1]||'A').trim()||'A').toUpperCase(),cam:(r[2]||'').trim(),script:(r[3]||'').trim()})).filter(x=>x.script); }
@@ -386,13 +396,28 @@ async function loadAll(){
         DATA[k]=obj;
       }
       usingSample[k]=false;
-    }catch(e){ DATA[k]=SAMPLE[k]; usingSample[k]=true; }
+      const n=(k==='page')?Object.keys(DATA[k]).length:DATA[k].length;
+      STATUS[k]={state:'ok',n};
+    }catch(e){ DATA[k]=SAMPLE[k]; usingSample[k]=true; STATUS[k]={state:'fail'}; }
   }
+  renderSrcStatus(STATUS);
   const t=new Date();
   const anySample=Object.values(usingSample).some(Boolean);
   const msg=(anySample?'Sample data showing. Wire the sheets in Setup. ':'')+'Updated '+t.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
   stampEls.forEach(e=>{if(e){e.textContent=msg; if(anySample)e.classList.add('err');}});
   renderPage(); renderRunSheet(); renderAllocation(); renderBrave();
+}
+function renderSrcStatus(STATUS){
+  const el=document.getElementById('srcStatus'); if(!el) return;
+  const labels={script:'Script',presenters:'Presenters',crew:'Crew',brave:'Very Factual News',page:'Page'};
+  el.innerHTML=Object.keys(labels).map(k=>{
+    const s=STATUS[k]||{state:'nolink'};
+    let txt,col;
+    if(s.state==='ok'){ txt='loaded '+s.n+(k==='page'?' fields':' rows'); col='#1f8f3e'; }
+    else if(s.state==='fail'){ txt='link not reaching, on sample'; col='#c00060'; }
+    else { txt='no link, on sample'; col='#9a7400'; }
+    return `<div><b>${labels[k]}:</b> <span style="color:${col}">${txt}</span></div>`;
+  }).join('');
 }
 
 /* ---------- lookups ---------- */
