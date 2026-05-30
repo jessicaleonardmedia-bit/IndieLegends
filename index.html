@@ -146,19 +146,19 @@
   <header>
     <div class="tc"><span class="rec"><span class="recdot"></span>Rec</span> <span class="ch">Channel 31</span></div>
     <h1>C31 Studio <span class="hi">Excursion</span></h1>
-    <div class="subh">Tuesday 2 June 2026 &nbsp;//&nbsp; CALL TIME 9AM AT SCHOOL &nbsp;//&nbsp; studio 10:30 to 12:30</div>
+    <div class="subh" id="pgSubh">Tuesday 2 June 2026 &nbsp;//&nbsp; CALL TIME 9AM AT SCHOOL &nbsp;//&nbsp; studio 10:30 to 12:30</div>
   </header>
 
   <div class="infogrid">
     <div class="topinfo">
-      <div class="tiline"><span class="tikey">Address</span>C31 Studios, Suite 1, 2-4 Douglas Street, Southbank.</div>
-      <div class="tiline"><span class="tikey">Getting there</span>Train to Southern Cross, then the route 96 tram to Clarendon Street Junction. A short walk from there. Trams every 7 to 8 minutes.</div>
-      <div class="tiline alert"><span class="tikey">Emergency contacts</span>Hospital: The Alfred, 55 Commercial Road. Police: 211 Bank Street, South Melbourne.</div>
+      <div class="tiline"><span class="tikey">Address</span><span id="pgAddress">C31 Studios, Suite 1, 2-4 Douglas Street, Southbank.</span></div>
+      <div class="tiline"><span class="tikey">Getting there</span><span id="pgGetting">Train to Southern Cross, then the route 96 tram to Clarendon Street Junction. A short walk from there. Trams every 7 to 8 minutes.</span></div>
+      <div class="tiline alert"><span class="tikey">Emergency contacts</span><span id="pgEmergency">Hospital: The Alfred, 55 Commercial Road. Police: 211 Bank Street, South Melbourne.</span></div>
     </div>
 
     <div class="reminders">
       <div class="remhdr">Reminders</div>
-      <ul class="remlist">
+      <ul class="remlist" id="pgReminders">
         <li>Enclosed shoes in the studio.</li>
         <li>Follow C31 staff at all times.</li>
         <li>Quiet on the floor when the tally light is on.</li>
@@ -254,6 +254,7 @@
       <div class="setuprow"><label>Presenters</label><input type="text" id="urlPresenters" placeholder="Presenters CSV link"></div>
       <div class="setuprow"><label>Crew</label><input type="text" id="urlCrew" placeholder="Crew CSV link"></div>
       <div class="setuprow"><label>Brave reads</label><input type="text" id="urlBrave" placeholder="Brave reads CSV link"></div>
+      <div class="setuprow"><label>Page</label><input type="text" id="urlPage" placeholder="Page CSV link"></div>
       <div style="display:flex;gap:8px;margin-top:4px"><button class="btn go" id="saveUrls">Save and load</button><button class="btn" id="clearUrls">Clear</button></div>
     </div>
     <div class="help" style="margin-top:14px">
@@ -261,7 +262,8 @@
       Script: Group, Pair, Cam, Script. Use &lt;P1&gt; to &lt;P4&gt; for the seat names, they fill in from Presenters. Row order is the read order.<br>
       Presenters: Group, Pair, Seat, Name.<br>
       Crew: Group, Role, Name.<br>
-      Brave reads: Title, Script. Leave &lt;NAME&gt; as is, the reader says their own name.
+      Brave reads: Title, Script. Leave &lt;NAME&gt; as is, the reader says their own name.<br>
+      Page: Key, Value. Keys: date, calltime, studio, address, gettingthere, emergency. For the reminders list, use a row keyed reminder for each one, as many as you like.
     </div>
   </section>
 
@@ -280,7 +282,8 @@ const CONFIG = {
   script:     "",
   presenters: "",
   crew:       "",
-  brave:      ""
+  brave:      "",
+  page:       ""
 };
 
 /* crew role order for display */
@@ -312,11 +315,20 @@ const SAMPLE = {
   brave:[
     {title:'Indie News bulletin',script:"Hello, and welcome to Indie News.\nMy name is <NAME>\nAnd I'm <NAME>\nThe Greensborough onion has achieved SEN-TEE-ENSS. (sample, your full text loads from the sheet)"},
     {title:'Snakesborough emergency',script:"We interrupt this bulletin for an emergency from Greensborough (GREENZ-buh-ruh). The snakes have declared independence. (sample, your full text loads from the sheet)"},
-  ]
+  ],
+  page:{
+    date:'Tuesday 2 June 2026',
+    calltime:'CALL TIME 9AM AT SCHOOL',
+    studio:'studio 10:30 to 12:30',
+    address:'C31 Studios, Suite 1, 2-4 Douglas Street, Southbank.',
+    gettingthere:'Train to Southern Cross, then the route 96 tram to Clarendon Street Junction. A short walk from there. Trams every 7 to 8 minutes.',
+    emergency:'Hospital: The Alfred, 55 Commercial Road. Police: 211 Bank Street, South Melbourne.',
+    reminders:['Enclosed shoes in the studio.','Follow C31 staff at all times.','Quiet on the floor when the tally light is on.']
+  }
 };
 
-let DATA = {script:[],presenters:[],crew:[],brave:[]};
-let usingSample = {script:true,presenters:true,crew:true,brave:true};
+let DATA = {script:[],presenters:[],crew:[],brave:[],page:{}};
+let usingSample = {script:true,presenters:true,crew:true,brave:true,page:true};
 let braveOpen = null;
 const LS = 'c31SheetUrls.v1';
 
@@ -354,7 +366,7 @@ async function fetchRows(url){
 async function loadAll(){
   const stampEls=[document.getElementById('stamp'),document.getElementById('stamp2'),document.getElementById('stamp3')];
   stampEls.forEach(e=>{if(e){e.classList.remove('err');e.textContent='Loading...';}});
-  const keys=['script','presenters','crew','brave'];
+  const keys=['script','presenters','crew','brave','page'];
   for(const k of keys){
     const url=urlFor(k);
     if(!url){ DATA[k]=SAMPLE[k]; usingSample[k]=true; continue; }
@@ -364,6 +376,15 @@ async function loadAll(){
       if(k==='presenters'){ rows=dropHeader(rows,'group|pair|seat|name'); DATA[k]=rows.map(r=>({group:(r[0]||'1').trim()||'1',pair:((r[1]||'A').trim()||'A').toUpperCase(),seat:(r[2]||'').trim(),name:(r[3]||'').trim()})).filter(x=>x.name); }
       if(k==='crew'){ rows=dropHeader(rows,'group|role|name'); DATA[k]=rows.map(r=>({group:(r[0]||'1').trim()||'1',role:(r[1]||'').trim(),name:(r[2]||'').trim()})).filter(x=>x.role); }
       if(k==='brave'){ rows=dropHeader(rows,'title|script'); DATA[k]=rows.map(r=>({title:(r[0]||'').trim(),script:(r[1]||'').trim()})).filter(x=>x.title||x.script); }
+      if(k==='page'){
+        rows=dropHeader(rows,'key|value|field');
+        const obj={reminders:[]};
+        rows.forEach(r=>{ const key=(r[0]||'').trim().toLowerCase().replace(/[^a-z]/g,''); const val=(r[1]||'').trim(); if(!key) return;
+          if(key==='reminder'||key==='reminders'){ if(val) obj.reminders.push(val); }
+          else obj[key]=val; });
+        if(!obj.reminders.length) delete obj.reminders;
+        DATA[k]=obj;
+      }
       usingSample[k]=false;
     }catch(e){ DATA[k]=SAMPLE[k]; usingSample[k]=true; }
   }
@@ -371,7 +392,7 @@ async function loadAll(){
   const anySample=Object.values(usingSample).some(Boolean);
   const msg=(anySample?'Sample data showing. Wire the sheets in Setup. ':'')+'Updated '+t.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
   stampEls.forEach(e=>{if(e){e.textContent=msg; if(anySample)e.classList.add('err');}});
-  renderRunSheet(); renderAllocation(); renderBrave();
+  renderPage(); renderRunSheet(); renderAllocation(); renderBrave();
 }
 
 /* ---------- lookups ---------- */
@@ -402,6 +423,25 @@ function subTags(script,group,pair){
   });
   s=s.replace(/&lt;NAME&gt;/g,'<span class="nametag">&lt;NAME&gt;</span>');
   return s;
+}
+
+/* ---------- page text (top of page) ---------- */
+function renderPage(){
+  const p=Object.assign({}, SAMPLE.page, DATA.page||{});
+  const sub=document.getElementById('pgSubh');
+  if(sub){
+    const bits=[p.date,p.calltime,p.studio].filter(x=>x&&x.trim());
+    sub.innerHTML=bits.map(escapeHtml).join(' &nbsp;//&nbsp; ');
+  }
+  const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val||'';};
+  set('pgAddress',p.address);
+  set('pgGetting',p.gettingthere);
+  set('pgEmergency',p.emergency);
+  const rem=document.getElementById('pgReminders');
+  if(rem){
+    const list=(p.reminders&&p.reminders.length)?p.reminders:SAMPLE.page.reminders;
+    rem.innerHTML=list.map(r=>`<li>${escapeHtml(r)}</li>`).join('');
+  }
 }
 
 /* ---------- run sheet ---------- */
@@ -505,7 +545,7 @@ function toast(m){const el=document.getElementById('toast');el.textContent=m;el.
 /* ---------- setup ---------- */
 function loadSetupFields(){
   const s=savedUrls();
-  ['Script','Presenters','Crew','Brave'].forEach(k=>{
+  ['Script','Presenters','Crew','Brave','Page'].forEach(k=>{
     const el=document.getElementById('url'+k); const key=k.toLowerCase();
     if(el) el.value=s[key]||'';
   });
@@ -515,7 +555,8 @@ document.getElementById('saveUrls').onclick=()=>{
     script:document.getElementById('urlScript').value.trim(),
     presenters:document.getElementById('urlPresenters').value.trim(),
     crew:document.getElementById('urlCrew').value.trim(),
-    brave:document.getElementById('urlBrave').value.trim()
+    brave:document.getElementById('urlBrave').value.trim(),
+    page:document.getElementById('urlPage').value.trim()
   };
   try{localStorage.setItem(LS,JSON.stringify(s));}catch(e){}
   toast('Saved, loading'); loadAll();
