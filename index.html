@@ -31,7 +31,8 @@
 
   .infogrid{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 16px 0}
   @media(min-width:680px){.infogrid{grid-template-columns:1fr 1fr;align-items:start}}
-  .topinfo{border:2px solid var(--black);border-radius:3px;background:#fff;overflow:hidden;margin:0}
+  .topinfo{border:2px solid var(--black);border-radius:3px;background:#fff;overflow:hidden;margin:0;padding:0}
+  .infohdr{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:17px;letter-spacing:.02em;color:var(--black);background:var(--cyan);margin:0;padding:7px 13px}
   .tiline{padding:9px 13px;border-bottom:1.5px dotted #d8d1bf;font-size:13.5px}
   .tiline:last-child{border-bottom:0}
   .tiline.alert{background:#fff3f9}
@@ -83,15 +84,15 @@
   .callseq .cl{font-family:var(--mono);font-size:13px;line-height:1.45}
   .callseq .cl .say{color:var(--ink);font-weight:700}
   .callseq .cl .do{color:#0089b3}
-  .items-dyn{padding:4px 0}
-  .ditem{display:grid;grid-template-columns:1fr 132px;gap:10px;padding:11px 13px;border-bottom:1.5px dotted #d8d1bf;align-items:start}
-  .ditem:last-child{border-bottom:0}
-  .ditem .scr{font-size:15px;white-space:pre-wrap;line-height:1.5}
-  .ditem .scr .pname{padding:0 6px;border-radius:10px;font-weight:700;border:1.5px solid currentColor}
-  .pname{background:#fff}
-  .ditem .scr .nametag{background:#ffe1f0;padding:0 4px;border-radius:2px;font-family:var(--mono);font-size:13px}
-  .ditem .cam{font-family:var(--mono);font-size:12.5px;color:#0089b3;border:2px solid #bfe9f7;border-radius:2px;padding:6px 8px;text-align:center;align-self:start}
-  .ditem .cam.none{color:var(--mute);border-color:#e3ddcd}
+  .rstbl{width:100%;min-width:620px;border-collapse:collapse;background:#fff;font-size:14px}
+  .rstbl th{background:#f0ece0;color:var(--ink);font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;text-align:left;padding:7px 10px;border:1.5px solid var(--black)}
+  .rstbl td{padding:9px 10px;border:1.5px solid #c9c2b0;vertical-align:top;line-height:1.5}
+  .rstbl td.it{font-family:var(--mono);font-size:12px;font-weight:700;color:#0089b3;white-space:nowrap;width:58px}
+  .rstbl td.sc{min-width:230px}
+  .rstbl td.vi{font-family:var(--mono);font-size:11.5px;color:#555;width:150px}
+  .rstbl td.c4{font-family:var(--mono);font-size:11.5px;color:#555;width:150px}
+  .rstbl .pname{padding:0 6px;border-radius:10px;font-weight:700;border:1.5px solid currentColor;background:#fff;white-space:nowrap}
+  .rstbl .missing{font-family:var(--mono);font-size:12px;color:#c00060}
   .cutbar{background:var(--black);color:var(--yellow);font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:9px 13px;text-align:center}
 
   .note{background:#fff6df;border:2px solid var(--black);padding:12px 14px;font-size:14px;border-radius:2px;margin-bottom:12px}
@@ -151,6 +152,7 @@
 
   <div class="infogrid">
     <div class="topinfo">
+      <div class="infohdr" id="pgInfoTitle">The basics</div>
       <div class="tiline"><span class="tikey">Address</span><span id="pgAddress">C31 Studios, Suite 1, 2-4 Douglas Street, Southbank.</span></div>
       <div class="tiline"><span class="tikey">Getting there</span><span id="pgGetting">Train to Southern Cross, then the route 96 tram to Clarendon Street Junction. A short walk from there. Trams every 7 to 8 minutes.</span></div>
       <div class="tiline alert"><span class="tikey">Emergency contacts</span><span id="pgEmergency">Hospital: The Alfred, 55 Commercial Road. Police: 211 Bank Street, South Melbourne.</span></div>
@@ -250,7 +252,7 @@
   <section id="setup" class="tabpanel" hidden>
     <div class="note"><b>One-time wiring.</b> Publish each sheet tab (File &gt; Share &gt; Publish to web &gt; pick the tab &gt; CSV) and paste its link below. These save in this browser. To set the links for everyone's phones at once, put them in the CONFIG block at the top of the page file instead. Leave a box blank to fall back to the built-in link.</div>
     <div class="setupbox">
-      <div class="setuprow"><label>Script</label><input type="text" id="urlScript" placeholder="Script CSV link"></div>
+      <div class="setuprow"><label>Newsreads</label><input type="text" id="urlNewsreads" placeholder="Newsreads CSV link"></div>
       <div class="setuprow"><label>Presenters</label><input type="text" id="urlPresenters" placeholder="Presenters CSV link"></div>
       <div class="setuprow"><label>Crew</label><input type="text" id="urlCrew" placeholder="Crew CSV link"></div>
       <div class="setuprow"><label>Brave reads</label><input type="text" id="urlBrave" placeholder="Brave reads CSV link"></div>
@@ -259,11 +261,11 @@
     </div>
     <div class="help" style="margin-top:14px">
       Sheet columns:<br>
-      Script: Group, Pair, Cam, Script. Use &lt;P1&gt; to &lt;P4&gt; for the seat names, they fill in from Presenters. Row order is the read order.<br>
+      Newsreads: Name, Newsread. One row per presenter, written ahead. The run sheet pulls each presenter's newsread by name once they are allocated.<br>
       Presenters: Group, Pair, Seat, Name.<br>
       Crew: Group, Role, Name.<br>
       Brave reads: Title, Script. Leave &lt;NAME&gt; as is, the reader says their own name.<br>
-      Page: Key, Value. Keys: date, calltime, studio, address, gettingthere, emergency. For the reminders list, use a row keyed reminder for each one, as many as you like.
+      Page: Key, Value. Keys: date, calltime, studio, infotitle, address, gettingthere, emergency. For the reminders list, use a row keyed reminder for each one, as many as you like.
     </div>
     <div class="help" style="margin-top:14px;border-top:1.5px solid #d8d1bf;padding-top:12px">
       <div style="font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:#0089b3;margin-bottom:6px">Source status</div>
@@ -283,7 +285,7 @@
    sheets are published. Until then the page shows sample data.
    ============================================================ */
 const CONFIG = {
-  script:     "",
+  newsreads:  "",
   presenters: "",
   crew:       "",
   brave:      "",
@@ -295,13 +297,11 @@ const CREW_ORDER = ['Vision Switch','Audio Desk','Lighting Desk','Assistant Dire
 
 /* ---------- sample data so the page renders before sheets are wired ---------- */
 const SAMPLE = {
-  script:[
-    {group:'1',pair:'A',cam:'Cam 1 wide',script:'Hello, and welcome to Indie News.'},
-    {group:'1',pair:'A',cam:'Cam 2 close on left',script:'My name is <P1>.'},
-    {group:'1',pair:'A',cam:'Cam 3 close on right',script:"And I'm <P2>."},
-    {group:'1',pair:'A',cam:'Cam 1 two-shot',script:"In today's news, a backyard barbecue in Greensborough turned tense at the weekend."},
-    {group:'1',pair:'B',cam:'Cam 1 wide',script:'Welcome back to Indie News.'},
-    {group:'1',pair:'B',cam:'Cam 2 close on left',script:"I'm <P1>, and tonight, the sport."},
+  newsreads:[
+    {name:'Bo',newsread:"In today's news, a backyard barbecue in Greensborough turned tense at the weekend. The cause? The onions. (sample, your real newsread loads from the sheet)"},
+    {name:'Eli',newsread:"The childcare dinosaur of Watsonia is no longer a statue. Greensyasaurus woke at dawn, blinked twice, and walked calmly into the community. (sample)"},
+    {name:'Gem',newsread:"Local sport now, and the under tens have made the grand final. (sample)"},
+    {name:'Harper',newsread:"And the weather: warm, with a strong chance of more news. (sample)"},
   ],
   presenters:[
     {group:'1',pair:'A',seat:'1',name:'Bo'},
@@ -324,6 +324,7 @@ const SAMPLE = {
     date:'Tuesday 2 June 2026',
     calltime:'CALL TIME 9AM AT SCHOOL',
     studio:'studio 10:30 to 12:30',
+    infotitle:'The basics',
     address:'C31 Studios, Suite 1, 2-4 Douglas Street, Southbank.',
     gettingthere:'Train to Southern Cross, then the route 96 tram to Clarendon Street Junction. A short walk from there. Trams every 7 to 8 minutes.',
     emergency:'Hospital: The Alfred, 55 Commercial Road. Police: 211 Bank Street, South Melbourne.',
@@ -331,8 +332,8 @@ const SAMPLE = {
   }
 };
 
-let DATA = {script:[],presenters:[],crew:[],brave:[],page:{}};
-let usingSample = {script:true,presenters:true,crew:true,brave:true,page:true};
+let DATA = {newsreads:[],presenters:[],crew:[],brave:[],page:{}};
+let usingSample = {newsreads:true,presenters:true,crew:true,brave:true,page:true};
 let loading = false;
 let braveOpen = null;
 const LS = 'c31SheetUrls.v1';
@@ -380,14 +381,14 @@ async function loadAll(){
   try{
   const stampEls=[document.getElementById('stamp'),document.getElementById('stamp2'),document.getElementById('stamp3')];
   stampEls.forEach(e=>{if(e){e.classList.remove('err');e.textContent='Loading...';}});
-  const keys=['script','presenters','crew','brave','page'];
+  const keys=['newsreads','presenters','crew','brave','page'];
   const STATUS={};
   for(const k of keys){
     const url=urlFor(k);
     if(!url){ DATA[k]=SAMPLE[k]; usingSample[k]=true; STATUS[k]={state:'nolink'}; continue; }
     try{
       let rows=await fetchRows(url);
-      if(k==='script'){ rows=dropHeader(rows,'group|pair|cam|script'); DATA[k]=rows.map(r=>({group:(r[0]||'1').trim()||'1',pair:((r[1]||'A').trim()||'A').toUpperCase(),cam:(r[2]||'').trim(),script:(r[3]||'').trim()})).filter(x=>x.script); }
+      if(k==='newsreads'){ rows=dropHeader(rows,'name|newsread|script'); DATA[k]=rows.map(r=>({name:(r[0]||'').trim(),newsread:(r[1]||'').trim()})).filter(x=>x.name); }
       if(k==='presenters'){ rows=dropHeader(rows,'group|pair|seat|name'); DATA[k]=rows.map(r=>({group:(r[0]||'1').trim()||'1',pair:((r[1]||'A').trim()||'A').toUpperCase(),seat:(r[2]||'').trim(),name:(r[3]||'').trim()})).filter(x=>x.name); }
       if(k==='crew'){ rows=dropHeader(rows,'group|role|name'); DATA[k]=rows.map(r=>({group:(r[0]||'1').trim()||'1',role:(r[1]||'').trim(),name:(r[2]||'').trim()})).filter(x=>x.role); }
       if(k==='brave'){ rows=dropHeader(rows,'title|script'); DATA[k]=rows.map(r=>({title:(r[0]||'').trim(),script:(r[1]||'').trim()})).filter(x=>x.title||x.script); }
@@ -415,7 +416,7 @@ async function loadAll(){
 }
 function renderSrcStatus(STATUS){
   const el=document.getElementById('srcStatus'); if(!el) return;
-  const labels={script:'Script',presenters:'Presenters',crew:'Crew',brave:'Very Factual News',page:'Page'};
+  const labels={newsreads:'Newsreads',presenters:'Presenters',crew:'Crew',brave:'Very Factual News',page:'Page'};
   el.innerHTML=Object.keys(labels).map(k=>{
     const s=STATUS[k]||{state:'nolink'};
     let txt,col;
@@ -444,6 +445,9 @@ function crewForGroup(group){
   return list;
 }
 function clapperName(group){ const c=DATA.crew.find(x=>x.group===group && x.role.toLowerCase()==='clapper'); return c?c.name:null; }
+function newsreadFor(name){ if(!name) return null; const r=DATA.newsreads.find(n=>n.name.trim().toLowerCase()===name.trim().toLowerCase()); return r?r.newsread:null; }
+function namePill(name){ return name?`<span class="pname" style="color:${colourFor(name)}">${escapeHtml(name)}</span>`:`<span class="pname" style="color:var(--mute)">unassigned</span>`; }
+function tintFor(name){ return name?colourFor(name)+'22':'transparent'; }
 
 function subTags(script,group,pair){
   let s=escapeHtml(script);
@@ -465,6 +469,7 @@ function renderPage(){
     sub.innerHTML=bits.map(escapeHtml).join(' &nbsp;//&nbsp; ');
   }
   const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val||'';};
+  set('pgInfoTitle',p.infotitle);
   set('pgAddress',p.address);
   set('pgGetting',p.gettingthere);
   set('pgEmergency',p.emergency);
@@ -478,14 +483,8 @@ function renderPage(){
 /* ---------- run sheet ---------- */
 function renderRunSheet(){
   const wrap=document.getElementById('runsheetBody');
-  if(!DATA.script.length){ wrap.innerHTML='<div class="empty">No script items yet. Wire the Script sheet in Setup.</div>'; return; }
-  const groupsOrder=[]; const gmap={};
-  DATA.script.forEach(it=>{
-    if(!gmap[it.group]){gmap[it.group]={order:[],pairs:{}};groupsOrder.push(it.group);}
-    const g=gmap[it.group];
-    if(!g.pairs[it.pair]){g.pairs[it.pair]=[];g.order.push(it.pair);}
-    g.pairs[it.pair].push(it);
-  });
+  const groupsOrder=[...new Set(DATA.presenters.map(p=>p.group))].sort();
+  if(!groupsOrder.length){ wrap.innerHTML='<div class="empty">No one allocated yet. Fill the Presenters tab in the sheet, then refresh.</div>'; return; }
   let html='';
   groupsOrder.forEach(gk=>{
     html+=`<div class="rsgroup">Group ${escapeHtml(gk)}</div>`;
@@ -493,31 +492,57 @@ function renderRunSheet(){
     if(crew.length){
       html+=`<div class="crewstrip"><b>Crew</b><br>${crew.map(c=>`<span class="cw">${escapeHtml(c.role)}: <span class="nm" style="color:${colourFor(c.name)}">${escapeHtml(c.name)}</span></span>`).join('')}</div>`;
     }
-    gmap[gk].order.forEach(pk=>{
-      const seats=DATA.presenters.filter(p=>p.group===gk&&p.pair===pk).sort((a,b)=>String(a.seat).localeCompare(String(b.seat)));
-      const whoHtml=seats.length?seats.map(s=>`<span class="whoname" style="color:${colourFor(s.name)}">${escapeHtml(s.name)}</span>`).join(''):'<span class="whoname" style="color:#6b6b6b">unassigned</span>';
+    const pairs=[...new Set(DATA.presenters.filter(p=>p.group===gk).map(p=>p.pair))].sort();
+    pairs.forEach(pk=>{
+      const n1=presenterName(gk,pk,'1'), n2=presenterName(gk,pk,'2');
+      const c1=colourFor(n1), c2=colourFor(n2);
       const clap=clapperName(gk);
+      const news1=newsreadFor(n1), news2=newsreadFor(n2);
+      const miss=s=>`<span class="missing">(no newsread loaded${s?' for '+escapeHtml(s):''})</span>`;
+
+      // the five fixed items from the tech spec
+      const rows=[
+        {item:'CAM 2', tint:'', scr:`${namePill(n1)} Hello, and welcome to Indie News. I'm ${namePill(n1)}. ${namePill(n2)} And I'm ${namePill(n2)}. Bringing you news from Greensborough and beyond.`,
+         vis:'Program: Cam 2<br>Preview: Cam 1<br>Cut on the last line.', cam4:''},
+        {item:'CAM 1', tint:tintFor(n1), scr:`${namePill(n1)} ${news1?escapeHtml(news1):miss(n1)}`,
+         vis:'Program: Cam 1<br>Preview: Cam 3<br>Cut on the last line.', cam4:''},
+        {item:'CAM 3', tint:tintFor(n2), scr:`${namePill(n2)} ${news2?escapeHtml(news2):miss(n2)}`,
+         vis:'Program: Cam 3<br>Preview: Cam 2<br>Cut on the last line.', cam4:''},
+        {item:'CAM 2', tint:'', scr:`${namePill(n1)} That's all from Indie News today. ${namePill(n2)} Thanks for watching.`,
+         vis:'Program: Cam 2<br>Preview: Cam 4<br>Cut on the last line.', cam4:''},
+        {item:'CAM 4', tint:'', scr:`${namePill(n1)} and ${namePill(n2)} shuffle your papers and pretend you're talking to each other.`,
+         vis:'Program: Cam 4<br>Preview: BLK<br>No cut button. When the camera has finished moving, use the lever to fade to black.',
+         cam4:'When your camera is live (the light changes colour), move backwards with the camera on the pedestal and raise it up slowly and gently.'},
+      ];
+
+      const whoHtml=[n1,n2].filter(Boolean).map(namePill).join(' ');
       html+=`<div class="pairblock">
-        <div class="pairtitle"><span>Pair <span class="pp">${escapeHtml(pk)}</span></span><span class="who">${whoHtml}</span></div>
+        <div class="pairtitle"><span>Pair <span class="pp">${escapeHtml(pk)}</span> &middot; Indie News</span><span class="who">${whoHtml||'<span class="whoname" style="color:#6b6b6b">unassigned</span>'}</span></div>
         <div class="callstrip">
           <div class="clab">Roll in</div>
           <div class="callseq">
             <div class="cl"><span class="do">Presenters and crew to positions.</span></div>
-            <div class="cl"><span class="say">"All quiet on the floor."</span></div>
+            <div class="cl"><span class="say">"All quiet on set."</span></div>
             <div class="cl"><span class="say">"Are we rolling?"</span> <span class="do">answered</span> <span class="say">"Rolling."</span></div>
-            <div class="cl"><span class="do">Clapper${clap?' ('+escapeHtml(clap)+')':''} slates the take and claps.</span></div>
+            <div class="cl"><span class="do">Clapper${clap?' ('+escapeHtml(clap)+')':''} checks the camera is recording, calls</span> <span class="say">"Indie News, Group ${escapeHtml(gk)}, clap"</span> <span class="do">and claps.</span></div>
             <div class="cl"><span class="say">"OK, and ten, nine, eight, seven, six, five, four"</span> <span class="do">then three, two, one on fingers.</span></div>
             <div class="cl"><span class="do">Point to cue the presenters.</span></div>
           </div>
         </div>
-        <div class="items-dyn">`;
-      gmap[gk].pairs[pk].forEach(it=>{
-        html+=`<div class="ditem">
-          <div class="scr">${subTags(it.script,gk,pk)}</div>
-          <div class="cam ${it.cam?'':'none'}">${it.cam?escapeHtml(it.cam):'no cam set'}</div>
-        </div>`;
+        <div class="tablewrap">
+          <table class="rstbl">
+            <thead><tr><th>Item</th><th>Script</th><th>Vision switcher</th><th>Camera 4</th></tr></thead>
+            <tbody>`;
+      rows.forEach(r=>{
+        html+=`<tr${r.tint?` style="background:${r.tint}"`:''}>
+          <td class="it">${r.item}</td>
+          <td class="sc">${r.scr}</td>
+          <td class="vi">${r.vis}</td>
+          <td class="c4">${r.cam4||''}</td>
+        </tr>`;
       });
-      html+=`</div><div class="cutbar">Hold until "Cut"</div></div>`;
+      html+=`</tbody></table></div>
+        <div class="cutbar">Hold the freeze, then fade to black on the lever</div></div>`;
     });
   });
   wrap.innerHTML=html;
@@ -576,14 +601,14 @@ function toast(m){const el=document.getElementById('toast');el.textContent=m;el.
 /* ---------- setup ---------- */
 function loadSetupFields(){
   const s=savedUrls();
-  ['Script','Presenters','Crew','Brave','Page'].forEach(k=>{
+  ['Newsreads','Presenters','Crew','Brave','Page'].forEach(k=>{
     const el=document.getElementById('url'+k); const key=k.toLowerCase();
     if(el) el.value=s[key]||'';
   });
 }
 document.getElementById('saveUrls').onclick=()=>{
   const s={
-    script:document.getElementById('urlScript').value.trim(),
+    newsreads:document.getElementById('urlNewsreads').value.trim(),
     presenters:document.getElementById('urlPresenters').value.trim(),
     crew:document.getElementById('urlCrew').value.trim(),
     brave:document.getElementById('urlBrave').value.trim(),
